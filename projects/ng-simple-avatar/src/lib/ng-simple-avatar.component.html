@@ -1,0 +1,11 @@
+<div class="circle" [style.backgroundColor]="config.bgColor" [style.width.px]="config.size">
+  <ng-container *ngIf="config.img || !config.text; else textTmpl">
+    <img [attr.src]="img"/>
+  </ng-container>
+
+  <ng-template #textTmpl>
+    <div *ngIf="config.text" class="text">
+      {{ config.text }}
+    </div>
+  </ng-template>
+</div>
