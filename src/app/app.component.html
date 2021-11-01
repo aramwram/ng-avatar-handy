@@ -1,1 +1,66 @@
-<ng-simple-avatar size="40" email="Aram.KhachatrianG@gmail.com" bgColor="red"></ng-simple-avatar>
+<mat-card [formGroup]="form">
+  <mat-card-header>
+    <mat-card-title>Options</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div>
+      <mat-form-field>
+        <input matInput formControlName="size" placeholder="Size">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <input matInput formControlName="email" placeholder="Email" type="email">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <input matInput formControlName="name" placeholder="Name">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <input matInput formControlName="img" placeholder="Image URL">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <input matInput formControlName="bgColor" placeholder="Background color">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <input matInput formControlName="borderColor" placeholder="Border color">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <input matInput formControlName="fallbackImg" placeholder="Fallback image">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <input matInput formControlName="fallbackText" placeholder="Fallback text">
+      </mat-form-field>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Result</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content class="avatar-card-wrapper">
+    <ng-simple-avatar [size]="form.get('size').value"
+      [email]="form.get('email').value"
+      [name]="form.get('name').value"
+      [img]="form.get('img').value"
+      [bgColor]="form.get('bgColor').value"
+      [borderColor]="form.get('borderColor').value"
+      [fallbackImg]="form.get('fallbackImg').value"
+      [fallbackText]="form.get('fallbackText').value">
+    </ng-simple-avatar>
+  </mat-card-content>
+</mat-card>

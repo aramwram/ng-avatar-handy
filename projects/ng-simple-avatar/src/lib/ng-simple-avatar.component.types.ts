@@ -3,5 +3,7 @@ export interface NgSimpleAvatarConfig {
   img?: string;
   fallbackImg?: string;
   bgColor?: string;
+  borderColor?: string;
   text?: string;
+  fallbackText?: string;
 }

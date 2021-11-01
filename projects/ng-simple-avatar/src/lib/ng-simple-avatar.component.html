@@ -1,10 +1,14 @@
-<div class="circle" [style.backgroundColor]="config.bgColor" [style.width.px]="config.size">
-  <ng-container *ngIf="config.img || !config.text; else textTmpl">
-    <img [attr.src]="img"/>
+<div class="circle"
+  [class.with-border]="!!config.borderColor"
+  [style.backgroundColor]="config.img || config.fallbackImg ? null : config.bgColor"
+  [style.width.px]="config.size"
+  [style.borderColor]="config.borderColor">
+  <ng-container *ngIf="config.img || config.fallbackImg; else textTmpl">
+    <img [attr.src]="config.img || config.fallbackImg" (error)="onError()"/>
   </ng-container>
 
   <ng-template #textTmpl>
-    <div *ngIf="config.text" class="text">
+    <div *ngIf="config.text" class="text" [style.color]="fgColor" [style.fontSize.px]="fontSize">
       {{ config.text }}
     </div>
   </ng-template>
