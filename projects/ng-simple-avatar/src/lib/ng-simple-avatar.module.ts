@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 
 import { NgSimpleAvatarComponent } from './ng-simple-avatar.component';
+import { ngSimpleAvatarConfig } from './ng-simple-avatar.tokens';
+import { NgSimpleAvatarConfig } from './ng-simple-avatar.types';
 
 
 @NgModule({
@@ -15,4 +17,13 @@ import { NgSimpleAvatarComponent } from './ng-simple-avatar.component';
     NgSimpleAvatarComponent
   ]
 })
-export class NgSimpleAvatarModule { }
+export class NgSimpleAvatarModule {
+  static forRoot(config?: NgSimpleAvatarConfig): ModuleWithProviders<NgSimpleAvatarModule> {
+    return {
+      ngModule: NgSimpleAvatarModule,
+      providers: [
+        { provide: ngSimpleAvatarConfig, useValue: config || {} }
+      ]
+    };
+  }
+}

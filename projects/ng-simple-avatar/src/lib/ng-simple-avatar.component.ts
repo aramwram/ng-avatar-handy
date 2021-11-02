@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
-import { NgSimpleAvatarConfig } from './ng-simple-avatar.component.types';
+import { ChangeDetectionStrategy, Component, Inject, Input, OnInit, Optional } from '@angular/core';
+import { ngSimpleAvatarConfig } from './ng-simple-avatar.tokens';
+import { NgSimpleAvatarConfig } from './ng-simple-avatar.types';
 
 @Component({
   selector: 'ng-simple-avatar',
@@ -16,15 +17,18 @@ export class NgSimpleAvatarComponent implements OnInit {
 
   @Input() set img(value: string) {
     this.config.img = value;
+    this.update();
   }
 
   @Input() set fallbackImg(value: string) {
     this.config.fallbackImg = value;
+    this.update();
   }
 
   @Input() set bgColor(value: string) {
     this.bgColorSet = !!value;
     this.config.bgColor = value;
+    this.update();
   }
 
   @Input() set borderColor(value: string) {
@@ -38,10 +42,7 @@ export class NgSimpleAvatarComponent implements OnInit {
 
     this.config.text = this.setTextFromName(value);
 
-    if (!this.bgColorSet) {
-      this.config.bgColor = this.generateColor();
-      this.fgColor = this.getFgColor(this.config.bgColor);
-    }
+    this.update();
   }
 
   @Input() set email(value: string) {
@@ -53,13 +54,10 @@ export class NgSimpleAvatarComponent implements OnInit {
 
     this.config.text =  this.setTextFromEmail(value);
 
-    if (!this.bgColorSet) {
-      this.config.bgColor = this.generateColor();
-      this.fgColor = this.getFgColor(this.config.bgColor);
-    }
+    this.update();
   }
 
-  @Input() fallbackText(value: string) {
+  @Input() set fallbackText(value: string) {
     this.config.fallbackText = value;
   }
 
@@ -72,8 +70,12 @@ export class NgSimpleAvatarComponent implements OnInit {
   private _name: string;
   private _email: string;
 
-  constructor(private cdRef: ChangeDetectorRef) {
-    console.log(this);
+  constructor(@Optional() @Inject(ngSimpleAvatarConfig) ngSimpleAvatarConfig: NgSimpleAvatarConfig) {
+    this.config = {
+      size: 40,
+      fallbackText: '?',
+      ...ngSimpleAvatarConfig
+    };
   }
 
   ngOnInit(): void {}
@@ -84,8 +86,6 @@ export class NgSimpleAvatarComponent implements OnInit {
     if (!this.config.text) {
       this.config.text = this.config.fallbackText || '?';
     }
-
-    this.cdRef.markForCheck();
   }
 
   private setTextFromEmail(email: string): string {
@@ -117,7 +117,7 @@ export class NgSimpleAvatarComponent implements OnInit {
   }
 
   private generateColor(): string {
-    const text = ((this._name || '') + (this._email || '')) || this.config.text || '?';
+    const text = ((this._name || '') + (this._email || '')) || this.config.text || this.config.fallbackText || '?';
 
     let hash = 0;
 
@@ -162,5 +162,12 @@ export class NgSimpleAvatarComponent implements OnInit {
 
     // https://stackoverflow.com/a/3943023/112731
     return (r * 0.299 + g * 0.587 + b * 0.114) > 186 ? '#000000' : '#FFFFFF';
+  }
+
+  private update(): void {
+    if (!this.bgColorSet) {
+      this.config.bgColor = this.generateColor();
+      this.fgColor = this.getFgColor(this.config.bgColor);
+    }
   }
 }

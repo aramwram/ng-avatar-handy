@@ -8,8 +8,8 @@
   </ng-container>
 
   <ng-template #textTmpl>
-    <div *ngIf="config.text" class="text" [style.color]="fgColor" [style.fontSize.px]="fontSize">
-      {{ config.text }}
+    <div *ngIf="config.text || config.fallbackText" class="text" [style.color]="fgColor" [style.fontSize.px]="fontSize">
+      {{ config.text || config.fallbackText }}
     </div>
   </ng-template>
 </div>
