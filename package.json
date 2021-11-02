@@ -1,6 +1,15 @@
 {
   "name": "demo",
   "version": "0.0.0",
+  "keywords": [
+    "angular",
+    "avatar",
+    "initials",
+    "generated",
+    "background",
+    "fallback",
+    "simple"
+  ],
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

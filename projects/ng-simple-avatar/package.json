@@ -1,6 +1,29 @@
 {
   "name": "ng-simple-avatar",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "description": "Simple yet configurable avatar component with image, initials, dynamic background and fallback system",
+  "author": {
+    "email": "aram.khachatrian.go@gmail.com",
+    "name": "Aram Khachatrian"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aramwram/ng-simple-avatar"
+  },
+  "bugs": {
+    "url": "https://github.com/aramwram/ng-simple-avatar/issues"
+  },
+  "homepage": "https://github.com/aramwram/ng-simple-avatar",
+  "keywords": [
+    "angular",
+    "avatar",
+    "initials",
+    "generated",
+    "background",
+    "fallback",
+    "simple"
+  ],
+  "license": "MIT",
   "peerDependencies": {
     "@angular/common": "^12.2.0",
     "@angular/core": "^12.2.0"

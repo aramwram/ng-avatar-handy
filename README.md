@@ -1,27 +1,75 @@
+# Description
+Simple yet configurable avatar component with image, initials, dynamic background and fallback system for invalid image URLs.
+
+[![npm version](https://badge.fury.io/js/ng-social-links.svg)](https://badge.fury.io/js/ng-simple-avatar)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/aramwram/ng-simple-avatar/blob/master/LICENSE.md)
+[![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
+
 # Demo
+You can clone the repo and start the application locally to watch ng-simple-avatar lib in action.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.12.
+# Usage
+Install package
+```sh
+npm i ng-simple-avatar
+```
+Add import to your module
+```js
+import { NgSimpleAvatarModule } from 'ng-simple-avatar';
 
-## Development server
+@NgModule({
+  imports: [
+    ...
+    NgSimpleAvatarModule,
+  ],
+  declarations: [],
+  providers: []
+})
+```
+Then in template:
+```html
+  <ng-simple-avatar [size]="64" img="https://i.pinimg.com/736x/ef/b4/56/efb4563befb0ae1bed74f004785f3f0f.jpg"></<ng-simple-avatar>
+  <ng-simple-avatar name="Bob Marley" email="bob.marley@ebox.com"></<ng-simple-avatar>
+  <ng-simple-avatar [size]="100" email="bob.marley@ebox.com" borderColor="brown"></<ng-simple-avatar>
+```
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Options
 
-## Code scaffolding
+| Option            | Type                           | Default                        | Description                                                                |
+| ----------------- | ------------------------------ | ------------------------------ | -------------------------------------------------------------------------- |
+| size              | number                         | 40                             | Avatar diameter in pixels.                                                 |
+| name              | string                         | none                           | Name from which initials are generated (has higher priority than email).   |
+| email             | string                         | none                           | Email from which initials are generated.                                   |
+| img               | string                         | none                           | Avatar image (has higher priority than initials).                          |
+| bgColor           | string                         | none                           | Background color to use if no image is provided. Generated if not set.     |
+| borderColor       | string                         | none                           | Border color.                                                              |
+| borderColor       | string                         | none                           | Border color.                                                              |
+| fallbackImg       | string                         | none                           | Image to use when main image failed to load.                               |
+| fallbackText      | string                         | ?                              | Text to display when initials cannot be generated.                         |
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Configuration
+You can configure default ng-simple-avatar options:
+```js
+NgMaterialLoadingModule.forRoot({
+  size: '64',
+  fallbackImg: 'https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png',
+  fallbackText: 'F',
+  ...
+})
+```
 
-## Build
+The configuration interface looks like this:
+```js
+export interface NgSimpleAvatarConfig {
+  size?: number;
+  img?: string;
+  fallbackImg?: string;
+  bgColor?: string;
+  borderColor?: string;
+  text?: string;
+  fallbackText?: string;
+}
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+# Contributig to ng-simple-avatar
+You are more than welcome to improve this library or create issues on the GitHub issue tracker.
