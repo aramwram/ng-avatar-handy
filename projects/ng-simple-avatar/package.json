@@ -1,6 +1,6 @@
 {
   "name": "ng-simple-avatar",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Simple yet configurable avatar component with image, initials, dynamic background and fallback system",
   "author": {
     "email": "aram.khachatrian.go@gmail.com",
